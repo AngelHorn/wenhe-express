@@ -1,0 +1,396 @@
+<html lang="zh-CN" class="pixel-ratio-3 retina ios ios-11 ios-11-0 ios-gt-10 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>文禾 - 快递查询</title>
+    <link rel="stylesheet" href="./fuck_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./fuck_files/weui.min.css">
+    <link rel="stylesheet" href="./fuck_files/jquery-weui.min.css">
+    <link rel="stylesheet" href="./fuck_files/fontello.css">
+    <link rel="stylesheet" href="./fuck_files/sweetalert.css">
+    <link href="http://cdn.dh.cx/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="./fuck_files/product_query.css">
+    <style type="text/css">
+        html {
+            margin-bottom: 100px;
+            position: relative;
+            height: 100vh;
+            margin: 0
+        }
+
+        footer {
+            position: fixed;
+            z-index: 99;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center
+        }
+
+        .footer2 {
+            position: absolute;
+            z-index: 99;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center
+        }
+
+        /*@font-face {*/
+        /*font-family: 'fontello';*/
+        /*src: url('/static/font/fontello.eot?87236934');*/
+        /*src: url('/static/font/fontello.eot?87236934#iefix') format('embedded-opentype'),*/
+        /*url('/static/font/fontello.woff2?87236934') format('woff2'),*/
+        /*url('/static/font/fontello.woff?87236934') format('woff'),*/
+        /*url('/static/font/fontello.ttf?87236934') format('truetype'),*/
+        /*url('/static/font/fontello.svg?87236934#fontello') format('svg');*/
+        /*font-weight: normal;*/
+        /*font-style: normal;*/
+        /*}*/
+        #click_copy {
+            background-color: #ebad8a;
+            border: none;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 7px 25px;
+        }
+
+        .footer2 p {
+            color: #999;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .footer2 p:before, footer p:after {
+            content: "";
+            height: 1px;
+            width: 30%;
+            background: #ddd;
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 6%;
+        }
+
+        .footer2 p:after {
+            right: 6%;
+            left: inherit;
+        }
+
+        .footer2 img {
+            max-width: 30px;
+        }
+
+        .footer2 .footlogo span {
+            margin-left: 10px;
+            color: #666;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="weui-row weui-no-gutter">
+        <!--<div class="weui-col-20">-->
+            <!--<i class="icon-menu-1" id="header_sheet"></i>-->
+        <!--</div>-->
+        <!--<div class="weui-col-60">-->
+            <!--<a href="http://www.yichadan.com/" class="header_title">-->
+                <!--<img src="./fuck_files/header_logo.png" alt="易查单" id="header_logo">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--<div class="weui-col-20">-->
+            <!--<a href="http://www.yichadan.com/user"><i class="icon-user-1"></i></a>-->
+        <!--</div>-->
+    </div>
+</header>
+<section id="product_head" class="col-xs-12 weui_article">
+    <h1>文禾 - 快递查询</h1>
+</section>
+<section id="query_block" class="col-xs-12">
+    <form>
+        <div class="input-group">
+            <input id="input_query_str" type="text" name="query_str" value="9978101653647" autocomplete="off"
+                   placeholder="姓名/电话/快递单号" class="form-control input-lg">
+          <span class="input-group-btn">
+            <input id="input_query_submit" type="button" class="btn btn-success btn-lg" value="查一下">
+          </span>
+        </div>
+    </form>
+</section>
+<section id="record_info" class="col-xs-12">
+    <div class="weui_panel">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <p class="weui_media_desc">
+                    <span class="info_name">姓名</span>：
+              <span id="v-name" class="info_text">
+              赵云鹏              </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="info_name">电话</span>：
+              <span id="v-tel" class="info_text">
+              139****5515              </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="info_name">快递单号</span>：
+              <span id="v-number" class="info_text">
+              9978101653647              </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="info_name">地址</span>：
+              <span id="v-address" class="info_text">
+              文山              </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="info_name">购买产品</span>：
+              <span id="v-product" class="info_text">
+              大锤              </span>
+                </p>
+
+                <p class="weui_media_desc">
+                    <span class="info_name">创建时间</span>：
+              <span id="v-created-at" class="info_text">
+              1              </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="bill_info" class="col-xs-12" style="">
+    <div class="weui_panel">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <p class="weui_media_desc">
+                    <span class="info_name">快递公司</span>：
+              <span class="info_text">
+                <a href="http://apis.dh.cx/youzheng" class="text_company_full link_company_page">邮政快递</a><small>（不是<span
+                      class="text_company">邮政</span>？<a href="http://kd.dh.cx/a107f#" class="select_company">重新选择</a>）
+              </small>
+              </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="bill_error" class="col-xs-12" style="display:none;">
+    <div class="weui_panel">
+        <div class="weui_panel_bd">
+            <div class="weui_media_box weui_media_text">
+                <h4 class="weui_media_title text-center">
+                    <i class="weui_icon_warn"></i>
+                    <span class="text-danger">暂无查询结果，新单号请稍后再查</span>
+                </h4>
+                <ul class="weui_media_desc" style="list-style:disc inside none;">
+                    <li style="margin: 5px 0 10px 0;"><span>自动识别：<i style="font-style: normal"
+                                                                    id="what_exp">无法识别</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                            href="http://kd.dh.cx/a107f#" class="select_company">手动选择快递公司</a></li>
+                    <li style="margin: 5px 0 10px 0;">关注“易查单”公众号查询</li>
+                    <li id="error_official" style="margin: 5px 0 10px 0;">到<span class="text_company">邮政</span><a
+                            href="http://kd.dh.cx/a107f#" target="_blank">官网查询</a></li>
+                    <li style="list-style:none inside none; font-size: 13px;text-align: center; margin-top: 13px;color:#5a5a5a;margin: 5px 0 10px 0;">
+                        <button id="click_copy" data-clipboard-text="9978101653647">复制单号</button>
+                    </li>
+                    <span style="margin-top:120px;display:block;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="bill_detail" class="col-xs-12" style="">
+    <div class="list weui_panel">
+        <div class="weui_panel_bd" id="bill_detail_list">
+            <div class="weui_media_box"><p class="weui_media_desc">离开【西安中心】，下一站【昆明发行】</p>
+
+                <p class="weui_media_desc">
+                    <small><span class="label label-info">7 小时前</span>&nbsp;2018-10-07 09:31</small>
+                </p>
+            </div>
+            <div class="weui_media_box"><p class="weui_media_desc">到达【西安中心】</p>
+
+                <p class="weui_media_desc">
+                    <small>2018-10-06 22:26</small>
+                </p>
+            </div>
+            <div class="weui_media_box"><p class="weui_media_desc">离开【洛川发投】，下一站【西安中心】</p>
+
+                <p class="weui_media_desc">
+                    <small>2018-10-06 17:21</small>
+                </p>
+            </div>
+            <div class="weui_media_box"><p class="weui_media_desc">到达【洛川发投】</p>
+
+                <p class="weui_media_desc">
+                    <small>2018-10-06 15:59</small>
+                </p>
+            </div>
+            <div class="weui_media_box"><p class="weui_media_desc">离开【邮政陕西省洛川县】</p>
+
+                <p class="weui_media_desc">
+                    <small>2018-10-06 15:35</small>
+                </p>
+            </div>
+            <div class="weui_media_box"><p class="weui_media_desc">【全国中心邮政陕西省洛川县】已经收寄</p>
+
+                <p class="weui_media_desc">
+                    <small>2018-10-06 15:06</small>
+                </p>
+            </div>
+        </div>
+        <span style="margin-top:110px;display:block;"></span>
+    </div>
+</section>
+
+<script src="./fuck_files/jquery.min.js"></script>
+<script>
+    if (!window.jQuery) {
+        var script = document.createElement('script');
+        script.src = "/static/js/jquery.min.js";
+        document.body.appendChild(script);
+    }
+</script>
+<script src="./fuck_files/jquery-weui.min.js"></script>
+<script src="./fuck_files/sweetalert.min.js"></script>
+<script src="./fuck_files/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript"> var queryNo = '9978101653647';
+var queryCompany = 'unknown'; </script>
+<script src="./fuck_files/product_query1.js"></script>
+
+<script type="text/javascript">
+    var share_img = 'http://img.dh.cx/static/img/logo_132.jpg';
+    var share_title = 'fuck';
+    var share_desc = 'kd.dh.cx/a107f';
+    var share_link = 'http://kd.dh.cx/a107f';
+
+
+    function update_weixin_share() {
+        var share_data = {
+            title: share_title,
+            desc: share_desc,
+            imgUrl: share_img,
+            link: share_link
+        };
+    }
+</script>
+<script>
+    var page = 1;
+    var view_id = 0;
+    var if_next = 1;
+    var if_prev = 1;
+    $("#next_page").click(function () {
+
+//            var base_url = $(this).parent().prev().attr('data-baseurl');
+//            var get_url = base_url + '/'+view_id+'/unkown/'+page;
+        var get_url = '/check.php';
+
+        if (if_next) {
+
+            $.get(get_url, function (data) {
+                data = JSON.parse(data);
+                if (data.status == 1) {
+                    var view_html = '';
+                    for (var i in data.info) {
+                        view_html += '<label class="weui_cell weui_check_label" for="r' + i + '" data-record="' + i + '">' +
+                        '          <div class="weui_cell_bd weui_cell_primary">' +
+                        '            <p>' + data.info[i] + '</p>' +
+                        '          </div>' +
+                        '          <div class="weui_cell_ft">' +
+                        '            <input type="radio" class="weui_check" name="radio1" id="r' + i + '">' +
+                        '            <span class="weui_icon_checked"></span>' +
+                        '          </div>' +
+                        '        </label>'
+                    }
+                    $("#view_data").html(view_html);
+                    if_prev = 1;
+                    page++;
+                } else {
+                    alert('没有数据了');
+                    if_next = 0;
+                }
+            })
+        } else
+            alert('没有数据了');
+    });
+    $("#prev_page").click(function () {
+        if (if_prev) {
+            page = page - 1;
+            if (if_next == 0)
+                page = page - 1;
+            var base_url = $(this).parent().prev().attr('data-baseurl');
+            var get_url = base_url + '/' + view_id + '/unkown/' + page;
+            $.get(get_url, function (data) {
+                data = JSON.parse(data);
+                if (data.status == 1) {
+                    var view_html = '';
+                    for (var i in data.info) {
+                        view_html += '<label class="weui_cell weui_check_label" for="r' + i + '" data-record="' + i + '">' +
+                        '          <div class="weui_cell_bd weui_cell_primary">' +
+                        '            <p>' + data.info[i] + '</p>' +
+                        '          </div>' +
+                        '          <div class="weui_cell_ft">' +
+                        '            <input type="radio" class="weui_check" name="radio1" id="r' + i + '">' +
+                        '            <span class="weui_icon_checked"></span>' +
+                        '          </div>' +
+                        '        </label>'
+                    }
+                    $("#view_data").html(view_html);
+                    if_next = 1;
+                } else {
+                    alert('没有数据了');
+                    if_prev = 0;
+                    page = 1;
+                }
+            })
+        } else {
+            alert('没有数据了');
+            page = 1;
+        }
+    });
+</script>
+
+<script src="./fuck_files/clipboard.min.js"></script>
+<script>
+    var clipboard = new Clipboard(document.querySelector('#click_copy'));
+    clipboard.on('success', function (e) {
+        swal("单号已复制")
+    });
+</script>
+<script>
+    //鹏爹的代码
+    $(function () {
+        $("#input_query_submit").click(function () {
+            var keyword = $("#input_query_str").val();
+            if (keyword.length < 1) {
+                return;
+            }
+            $.get('/check.php', {keyword: keyword}, function (json) {
+                if (json.code !== 200) {
+                    handle_ret_error();
+                    return;
+                }
+                $("#v-name").text(json.data[0].name);
+                $("#v-tel").text(json.data[0].tel);
+                $("#v-number").text(json.data[0].number);
+                $("#v-created-at").text(json.data[0].created_at);
+                if (json.data[0].express_info.Result.WaybillProcessInfo.length > 0) {
+                    //组装快递信息
+//                    console.log("fuck");
+                    handle_ret_success(json.data[0].express_info);
+                } else {
+                    handle_ret_error();
+                }
+                $('#record_info').show();
+                $('#bill_error').hide();
+            }, 'json');
+        })
+    })
+</script>
+
+</body>
+</html>
